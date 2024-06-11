@@ -1,0 +1,10 @@
+<ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs" [destroyOnHide]="true">
+    <li [ngbNavItem]="i" *ngFor="let tab of data; let i = index">
+        <button ngbNavLink>{{tab.name }}<span>&nbsp;&nbsp;</span><i class="bi bi-x-lg icon" style="color: red;" (click)="close($event)"></i></button>
+        <ng-template ngbNavContent>
+            <app-table-view [data]="tab"></app-table-view>
+        </ng-template>
+    </li>
+</ul>
+
+<div [ngbNavOutlet]="nav" class="mt-2"></div>
