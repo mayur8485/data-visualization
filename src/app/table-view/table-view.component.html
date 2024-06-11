@@ -1,0 +1,21 @@
+<div class="table-container">
+    <table class="table" *ngIf="data">
+        <thead>
+            <tr>
+                <th scope="col" style="background-color: #f9f9f9;" >#</th>
+                <th scope="col" style="background-color: #f9f9f9;" *ngFor="let head of data.headers">{{head}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let row of dataChunks; let i=index">
+                <th scope="row" [ngStyle]="{'background-color': i%2==0?'#ebebeb':'transparent'}">{{i+1}}</th>
+                <td [ngStyle]="{'background-color': i%2==0?'#ebebeb':'transparent'}" *ngFor="let head of data.headers">{{row[head]}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="box d-flex flex-row justify-content-center" style="height: 55px;">
+    <ng-container *ngIf="noOfPages.length>1">
+      <button class="btn btn-tertiary p-2" *ngFor="let page of noOfPages" (click)="addPagination(page)">{{page}}</button>
+    </ng-container>
+  </div>
