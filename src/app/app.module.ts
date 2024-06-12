@@ -9,6 +9,7 @@ import { NgbNavModule, NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
 import { PieChartComponent } from './charts/pie-chart/pie-chart.component';
 import { BarChartComponent } from './charts/bar-chart/bar-chart.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ChartComponent } from './charts/chart/chart.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HeaderComponent,
     NavTabComponent,
     PieChartComponent,
-    BarChartComponent
+    BarChartComponent,
+    ChartComponent
   ],
   imports: [
     BrowserModule,

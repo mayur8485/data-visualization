@@ -1,9 +1,10 @@
-<div class="chart-container">
+<div class="chart-container" *ngIf="property && data">
+    <h3 style="float: inline-end; margin-right: 10px; margin-top: 5px;">Bar Chart</h3>
     <form [formGroup]="form">
         <input type="number" placeholder="height" formControlName="height">
         <input type="number" placeholder="width" formControlName="width">
         <input type="text" placeholder="xAxis" formControlName="xAxis">
         <input type="text" placeholder="yAxs" formControlName="yAxis">
     </form>
-    <div [id]="'my-id_'+index"></div>
+    <div [id]="'my-id_'+index" style="width: 100%; min-height: 100px"></div>
 </div>

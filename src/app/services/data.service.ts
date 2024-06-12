@@ -235,8 +235,18 @@ export class DataService {
                 "TRU",
                 "Population"
             ],
-            "name": "Untitled spreadsheet - Sheet1.csv"
-        },  
+            "name": "Untitled spreadsheet - Sheet1.csv",
+            "charts": [
+                {
+                    "type": "bar",
+                    "xAxis": "Name",
+                    "yAxis": "Population",
+                    "height": 400,
+                    "width": 1560,
+                    "yScale":25
+                }
+            ]
+        },
         {
             "name": "Untitled spreadsheet - Sheet1.csv",
             "data": [
@@ -449,7 +459,7 @@ export class DataService {
                 "PrimarySecondary\r"
             ]
         }
-    ]   
+    ]
 
     setData(data: any) {
         this.data.push(data);

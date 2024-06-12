@@ -7,10 +7,13 @@ import * as d3 from 'd3';
   templateUrl: './bar-chart.component.html',
   styleUrls: ['./bar-chart.component.css']
 })
-export class BarChartComponent implements OnInit, AfterViewInit {
-  @Input() index: any;
-  @Input() data: any;
+export class BarChartComponent implements OnInit {
+  index: any;
+  data: any;
+  property: any;
   form: any;
+
+  chartsType: any = ['plain', 'group'];
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -22,29 +25,53 @@ export class BarChartComponent implements OnInit, AfterViewInit {
     })
 
     this.form.valueChanges.subscribe((value: any) => {
-      this.createBarChart("my-id_" + this.index, value, this.data)
+      let data = this.prepareGroupChartData(this.data, value);
+      this.createBarChart("my-id_" + this.index, value, data)
     })
   }
 
-  ngAfterViewInit(): void {
-    console.log("Data in charts ", this.data)
-    let property: BarInterface = {
-      "type": "bar",
-      "xAxis": "Name",
-      "yAxis": "Population",
-      "height": 400,
-      "width": 1560
-    }
+  prepareGroupChartData(data: any, property: any) {
+    let newData: any = {}
+    data.forEach((each: any) => {
+      if (each[property['xAxis']] && each[property['xAxis']] != undefined) {
+        if (!newData[each[property['xAxis']]]) {
+          newData[each[property['xAxis']]] = +each[property['yAxis']]
+        }
+        newData[each[property['xAxis']]] += (+each[property['yAxis']])
+      }
+    })
 
-    this.form.patchValue(property);
-    this.createBarChart("my-id_" + this.index, property, this.data);
+    let finalData: any = [], max = 0;
+
+    Object.keys(newData).forEach((each: any) => {
+      let obj: any = {}
+      obj[property['xAxis']] = each;
+      obj[property['yAxis']] = newData[each];
+      if (newData[each] > max) {
+        max = newData[each];
+      }
+      finalData.push(obj)
+    })
+    property.yScale = max+10;
+    return finalData
+  }
+
+  drawChart() {
+    // console.log("Data in charts ", this.data, this.property)
+    this.form.patchValue(this.property);
+    if (this.property && this.data) {
+      let data = this.prepareGroupChartData(this.data, this.property);
+      this.createBarChart("my-id_" + this.index, this.property, data);
+    }
   }
 
   createBarChart(containerId: string, property: BarInterface, data: any): void {
+    data = [...data];
+    // console.log("Data received to draw a chart ", data);
+
     var container = d3.select("#" + containerId);
     // Remove existing SVG if any
     container.select("svg").remove();
-    console.log(d3.select("#" + containerId))
 
     // set the dimensions and margins of the graph
     var margin = { top: 30, right: 30, bottom: 70, left: 60 },
@@ -78,7 +105,7 @@ export class BarChartComponent implements OnInit, AfterViewInit {
 
     // Add Y axis
     const y = d3.scaleLinear()
-      .domain([0, 25])
+      .domain([0, property.yScale])
       .range([height, 0]);
     svg.append("g")
       .call(d3.axisLeft(y));
@@ -110,9 +137,11 @@ export class BarChartComponent implements OnInit, AfterViewInit {
 
 
 interface BarInterface {
-  "type": string,
+  "chart": string,
+  "type"?: string,
   "xAxis": string,
   "yAxis": string,
   "height": number,
-  "width": number
+  "width": number,
+  "yScale": number
 }
