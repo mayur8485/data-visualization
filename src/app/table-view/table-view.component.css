@@ -1,6 +1,7 @@
 .table-container {
     overflow-x: auto;
-    max-width: 100%; /* Adjust based on your layout */
+    max-width: 100%;
+    /* Adjust based on your layout */
     overflow-y: auto;
     max-height: 300px;
-  }
+}

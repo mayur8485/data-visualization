@@ -1,8 +1,9 @@
-<ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs" [destroyOnHide]="true">
+<ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
     <li [ngbNavItem]="i" *ngFor="let tab of data; let i = index">
-        <button ngbNavLink>{{tab.name }}<span>&nbsp;&nbsp;</span><i class="bi bi-x-lg icon" style="color: red;" (click)="close($event)"></i></button>
+        <button ngbNavLink class="text-truncate" style="max-width: 150px;" [ngbTooltip]="tab.name" placement="top" container="body">{{tab.name }}<span>&nbsp;&nbsp;</span><i class="bi bi-x-lg icon" style="color: red;" (click)="close($event)"></i></button>
         <ng-template ngbNavContent>
             <app-table-view [data]="tab"></app-table-view>
+            <app-bar-chart [data]="tab.data" [index]="i"></app-bar-chart>
         </ng-template>
     </li>
 </ul>

@@ -1,0 +1,9 @@
+<div class="chart-container">
+    <form [formGroup]="form">
+        <input type="number" placeholder="height" formControlName="height">
+        <input type="number" placeholder="width" formControlName="width">
+        <input type="text" placeholder="xAxis" formControlName="xAxis">
+        <input type="text" placeholder="yAxs" formControlName="yAxis">
+    </form>
+    <div [id]="'my-id_'+index"></div>
+</div>

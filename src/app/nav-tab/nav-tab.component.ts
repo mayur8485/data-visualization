@@ -4,7 +4,8 @@ import { DataService } from '../services/data.service';
 @Component({
   selector: 'app-nav-tab',
   templateUrl: './nav-tab.component.html',
-  styleUrls: ['./nav-tab.component.css']
+  styleUrls: ['./nav-tab.component.css'],
+  host: {'class':'position-relative', 'style':'top:56px'}
 })
 export class NavTabComponent implements OnInit {
   active = 0;

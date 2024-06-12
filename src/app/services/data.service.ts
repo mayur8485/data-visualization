@@ -8,6 +8,236 @@ export class DataService {
     dataObservable: any = new Subject();
     private data: any = [
         {
+            "data": [
+                {
+                    "Level": "India",
+                    "Name": "India",
+                    "TRU": "Total",
+                    "Population": "17"
+                },
+                {
+                    "Level": "India",
+                    "Name": "JAMMU & KASHMIR",
+                    "TRU": "Rural",
+                    "Population": "14"
+                },
+                {
+                    "Level": "India",
+                    "Name": "HIMACHAL PRADESH",
+                    "TRU": "Urban",
+                    "Population": "10"
+                },
+                {
+                    "Level": "STATE",
+                    "Name": "PUNJAB",
+                    "TRU": "Total",
+                    "Population": "19"
+                },
+                {
+                    "Level": "STATE",
+                    "Name": "CHANDIGARH",
+                    "TRU": "Rural",
+                    "Population": "10"
+                },
+                {
+                    "Level": "STATE",
+                    "Name": "UTTARAKHAND",
+                    "TRU": "Urban",
+                    "Population": "17"
+                },
+                {
+                    "Level": "STATE",
+                    "Name": "HARYANA",
+                    "TRU": "Total",
+                    "Population": "16"
+                },
+                {
+                    "Level": "STATE",
+                    "Name": "NCT OF DELHI",
+                    "TRU": "Rural",
+                    "Population": "12"
+                },
+                {
+                    "Level": "STATE",
+                    "Name": "RAJASTHAN",
+                    "TRU": "Urban",
+                    "Population": "20"
+                },
+                {
+                    "Level": "STATE",
+                    "Name": "UTTAR PRADESH",
+                    "TRU": "Total",
+                    "Population": "19"
+                },
+                {
+                    "Level": "STATE",
+                    "Name": "BIHAR",
+                    "TRU": "Rural",
+                    "Population": "12"
+                },
+                {
+                    "Level": "STATE",
+                    "Name": "SIKKIM",
+                    "TRU": "Urban",
+                    "Population": "13"
+                },
+                {
+                    "Level": "STATE",
+                    "Name": "ARUNACHAL PRADESH",
+                    "TRU": "Total",
+                    "Population": "16"
+                },
+                {
+                    "Level": "STATE",
+                    "Name": "NAGALAND",
+                    "TRU": "Rural",
+                    "Population": "17"
+                },
+                {
+                    "Level": "STATE",
+                    "Name": "MANIPUR",
+                    "TRU": "Urban",
+                    "Population": "18"
+                },
+                {
+                    "Level": "STATE",
+                    "Name": "MIZORAM",
+                    "TRU": "Total",
+                    "Population": "16"
+                },
+                {
+                    "Level": "STATE",
+                    "Name": "TRIPURA",
+                    "TRU": "Rural",
+                    "Population": "13"
+                },
+                {
+                    "Level": "STATE",
+                    "Name": "MEGHALAYA",
+                    "TRU": "Urban",
+                    "Population": "15"
+                },
+                {
+                    "Level": "STATE",
+                    "Name": "ASSAM",
+                    "TRU": "Total",
+                    "Population": "20"
+                },
+                {
+                    "Level": "STATE",
+                    "Name": "WEST BENGAL",
+                    "TRU": "Rural",
+                    "Population": "20"
+                },
+                {
+                    "Level": "STATE",
+                    "Name": "JHARKHAND",
+                    "TRU": "Urban",
+                    "Population": "13"
+                },
+                {
+                    "Level": "STATE",
+                    "Name": "ODISHA",
+                    "TRU": "Total",
+                    "Population": "14"
+                },
+                {
+                    "Level": "STATE",
+                    "Name": "CHHATTISGARH",
+                    "TRU": "Rural",
+                    "Population": "18"
+                },
+                {
+                    "Level": "STATE",
+                    "Name": "MADHYA PRADESH",
+                    "TRU": "Urban",
+                    "Population": "14"
+                },
+                {
+                    "Level": "STATE",
+                    "Name": "GUJARAT",
+                    "TRU": "Total",
+                    "Population": "11"
+                },
+                {
+                    "Level": "STATE",
+                    "Name": "DAMAN & DIU",
+                    "TRU": "Rural",
+                    "Population": "16"
+                },
+                {
+                    "Level": "STATE",
+                    "Name": "DADRA & NAGAR HAVELI",
+                    "TRU": "Urban",
+                    "Population": "12"
+                },
+                {
+                    "Level": "STATE",
+                    "Name": "MAHARASHTRA",
+                    "TRU": "Total",
+                    "Population": "14"
+                },
+                {
+                    "Level": "STATE",
+                    "Name": "ANDHRA PRADESH",
+                    "TRU": "Rural",
+                    "Population": "20"
+                },
+                {
+                    "Level": "STATE",
+                    "Name": "KARNATAKA",
+                    "TRU": "Urban",
+                    "Population": "15"
+                },
+                {
+                    "Level": "STATE",
+                    "Name": "GOA",
+                    "TRU": "Total",
+                    "Population": "16"
+                },
+                {
+                    "Level": "STATE",
+                    "Name": "LAKSHADWEEP",
+                    "TRU": "Rural",
+                    "Population": "16"
+                },
+                {
+                    "Level": "STATE",
+                    "Name": "KERALA",
+                    "TRU": "Urban",
+                    "Population": "15"
+                },
+                {
+                    "Level": "STATE",
+                    "Name": "TAMIL NADU",
+                    "TRU": "Total",
+                    "Population": "12"
+                },
+                {
+                    "Level": "STATE",
+                    "Name": "PUDUCHERRY",
+                    "TRU": "Rural",
+                    "Population": "20"
+                },
+                {
+                    "Level": "STATE",
+                    "Name": "ANDAMAN & NICOBAR ISLANDS",
+                    "TRU": "Urban",
+                    "Population": "17"
+                },
+                {
+                    "Level": ""
+                }
+            ],
+            "headers": [
+                "Level",
+                "Name",
+                "TRU",
+                "Population"
+            ],
+            "name": "Untitled spreadsheet - Sheet1.csv"
+        },  
+        {
             "name": "Untitled spreadsheet - Sheet1.csv",
             "data": [
                 {
@@ -219,7 +449,7 @@ export class DataService {
                 "PrimarySecondary\r"
             ]
         }
-    ]
+    ]   
 
     setData(data: any) {
         this.data.push(data);
