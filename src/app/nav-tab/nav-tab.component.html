@@ -1,14 +1,13 @@
 <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
     <li [ngbNavItem]="i" *ngFor="let tab of data; let i = index">
-        <!-- class="text-truncate" style="max-width: 150px;"  -->
-        <button ngbNavLink [ngbTooltip]="tab.name" placement="top" container="body">{{tab.name }}<span>&nbsp;&nbsp;</span><i class="bi bi-x-lg icon" style="color: red;" (click)="close($event)"></i></button>
+        <button ngbNavLink>{{tab.name}}<span>&nbsp;&nbsp;</span><i *ngIf="tab.id!=='9876543210'" class="bi bi-x-lg icon" style="color: red;" (click)="close($event, tab)"></i></button>
         <ng-template ngbNavContent>
-            <app-table-view [data]="tab"></app-table-view>
-            <!-- <app-bar-chart [data]="tab.data" [index]="i" [property]="tab.charts"></app-bar-chart> -->
-             <!-- <ng-container #chartPlace></ng-container> -->
-              <app-chart [data]="tab"></app-chart>
+            <section style="height: calc(100vh - 150px);overflow: auto;">
+                <app-table-view [data]="tab"></app-table-view>
+                <app-chart [data]="tab"></app-chart>
+            </section>
         </ng-template>
     </li>
 </ul>
 
-<div [ngbNavOutlet]="nav" class="mt-2"></div>
+<div [ngbNavOutlet]="nav" class="mt-2 mb-5"></div>
