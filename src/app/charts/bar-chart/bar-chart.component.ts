@@ -1,19 +1,17 @@
-import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import * as d3 from 'd3';
 
 @Component({
   selector: 'app-bar-chart',
   templateUrl: './bar-chart.component.html',
-  styleUrls: ['./bar-chart.component.css']
+  styleUrls: ['./bar-chart.component.css'],
 })
 export class BarChartComponent implements OnInit {
   index: any;
   data: any;
   property: any;
   form: any;
-
-  chartsType: any = ['plain', 'group'];
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -26,8 +24,28 @@ export class BarChartComponent implements OnInit {
 
     this.form.valueChanges.subscribe((value: any) => {
       let data = this.prepareGroupChartData(this.data, value);
-      this.createBarChart("my-id_" + this.index, value, data)
+      if (data) {
+        this.createChart("barChart_" + this.index, value, data)
+      }
     })
+  }
+
+  downloadSVG() {
+    const id = "#barChart_" + this.index;
+    const svgElement: any = document.querySelector(id);
+    const serializer = new XMLSerializer();
+    const source = serializer.serializeToString(svgElement);
+
+    const svgBlob = new Blob([source], { type: "image/svg+xml;charset=utf-8" });
+    const url = URL.createObjectURL(svgBlob);
+
+    const downloadLink = document.createElement('a');
+    downloadLink.href = url;
+    downloadLink.download = 'bar_chart.svg';
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+    URL.revokeObjectURL(url);
   }
 
   prepareGroupChartData(data: any, property: any) {
@@ -44,15 +62,17 @@ export class BarChartComponent implements OnInit {
     let finalData: any = [], max = 0;
 
     Object.keys(newData).forEach((each: any) => {
-      let obj: any = {}
-      obj[property['xAxis']] = each;
-      obj[property['yAxis']] = newData[each];
-      if (newData[each] > max) {
-        max = newData[each];
+      if (newData[each] && newData[each] !== undefined) {
+        let obj: any = {}
+        obj[property['xAxis']] = each;
+        obj[property['yAxis']] = newData[each];
+        if (newData[each] > max) {
+          max = newData[each];
+        }
+        finalData.push(obj)
       }
-      finalData.push(obj)
     })
-    property.yScale = max+10;
+    property.yScale = max + 10;
     return finalData
   }
 
@@ -61,11 +81,13 @@ export class BarChartComponent implements OnInit {
     this.form.patchValue(this.property);
     if (this.property && this.data) {
       let data = this.prepareGroupChartData(this.data, this.property);
-      this.createBarChart("my-id_" + this.index, this.property, data);
+      if (data) {
+        this.createChart("barChart_" + this.index, this.property, data);
+      }
     }
   }
 
-  createBarChart(containerId: string, property: BarInterface, data: any): void {
+  createChart(containerId: string, property: BarInterface, data: any): void {
     data = [...data];
     // console.log("Data received to draw a chart ", data);
 
@@ -137,8 +159,7 @@ export class BarChartComponent implements OnInit {
 
 
 interface BarInterface {
-  "chart": string,
-  "type"?: string,
+  "type": string,
   "xAxis": string,
   "yAxis": string,
   "height": number,
