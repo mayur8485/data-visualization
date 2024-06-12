@@ -10,6 +10,8 @@ import { PieChartComponent } from './charts/pie-chart/pie-chart.component';
 import { BarChartComponent } from './charts/bar-chart/bar-chart.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ChartComponent } from './charts/chart/chart.component';
+import { ModalComponent } from './modal/modal.component';
+import { LineChartComponent } from './charts/line-chart/line-chart.component';
 
 
 @NgModule({
@@ -20,14 +22,17 @@ import { ChartComponent } from './charts/chart/chart.component';
     NavTabComponent,
     PieChartComponent,
     BarChartComponent,
-    ChartComponent
+    ChartComponent,
+    ModalComponent,
+    LineChartComponent,
+
   ],
   imports: [
     BrowserModule,
     NgbNavModule,
     NgbTooltip,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
