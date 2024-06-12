@@ -17,15 +17,31 @@ export class HeaderComponent {
   parseCSV(csvContent: any, name: string) {
     let lines = csvContent.split('\n');
     let headers = lines[0].split(',');
-    var rows = lines.slice(1).map(function (line: any) {
-      let values = line.split(',');
-      let row: any = {};
-      headers.forEach((header: any, index: any) => {
-        row[header] = values[index];
-      });
-      return row;
+    console.log('headers ', headers)
+    let header_: any = [];
+    var rows: any = [];
+
+    lines.slice(1).forEach((line: any) => {
+      if (line.length > 0) {
+        let values = line.split(',');
+        let row: any = {};
+        headers.forEach((header: any, index: any) => {
+          row[header] = values[index];
+        });
+        rows.push(row);
+      }
     })
-    return { data: rows, headers: headers, name:name }
+
+    headers.forEach((header: any) => {
+      header_.push(
+        {
+          "key": header,
+          "value": header
+        }
+      )
+    });
+
+    return { data: rows, headers: header_, name: name, id: Math.floor(Math.random() * 10000000000) }
   }
 
   onAddData($event: any) {
