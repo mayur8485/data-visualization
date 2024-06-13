@@ -12,6 +12,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ChartComponent } from './charts/chart/chart.component';
 import { ModalComponent } from './modal/modal.component';
 import { LineChartComponent } from './charts/line-chart/line-chart.component';
+import { HomeComponent } from './home/home.component';
+import { ViewCardsComponent } from './home/view-cards/view-cards.component';
+import { ContactComponent } from './home/contact/contact.component';
 
 
 @NgModule({
@@ -25,6 +28,9 @@ import { LineChartComponent } from './charts/line-chart/line-chart.component';
     ChartComponent,
     ModalComponent,
     LineChartComponent,
+    HomeComponent,
+    ViewCardsComponent,
+    ContactComponent
 
   ],
   imports: [

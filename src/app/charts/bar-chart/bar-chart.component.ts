@@ -23,7 +23,7 @@ export class BarChartComponent implements OnInit {
     })
 
     this.form.valueChanges.subscribe((value: any) => {
-      let data = this.prepareGroupChartData(this.data, value);
+      let data = this.prepareData(this.data, value);
       if (data) {
         this.createChart("barChart_" + this.index, value, data)
       }
@@ -48,7 +48,7 @@ export class BarChartComponent implements OnInit {
     URL.revokeObjectURL(url);
   }
 
-  prepareGroupChartData(data: any, property: any) {
+  prepareData(data: any, property: any) {
     let newData: any = {}
     data.forEach((each: any) => {
       if (each[property['xAxis']] && each[property['xAxis']] != undefined) {
@@ -80,7 +80,7 @@ export class BarChartComponent implements OnInit {
     // console.log("Data in charts ", this.data, this.property)
     this.form.patchValue(this.property);
     if (this.property && this.data) {
-      let data = this.prepareGroupChartData(this.data, this.property);
+      let data = this.prepareData(this.data, this.property);
       if (data) {
         this.createChart("barChart_" + this.index, this.property, data);
       }
@@ -105,8 +105,8 @@ export class BarChartComponent implements OnInit {
     // append the svg object to the body of the page
     var svg = d3.select("#" + containerId)
       .append("svg")
-      .attr("width", property.width)
-      .attr("height", property.height)
+      .attr("width", property.width + margin.left + margin.right)
+      .attr("height", property.height + margin.top + margin.bottom)
       // .attr("viewBox", vb)
       .append("g")
       .attr("transform",

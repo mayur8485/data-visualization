@@ -2,6 +2,7 @@ import { Component, Input, OnInit, Type, ViewChild, ViewContainerRef } from '@an
 import { BarChartComponent } from '../bar-chart/bar-chart.component';
 import { PieChartComponent } from '../pie-chart/pie-chart.component';
 import { DataService } from 'src/app/services/data.service';
+import { LineChartComponent } from '../line-chart/line-chart.component';
 
 @Component({
   selector: 'app-chart',
@@ -33,7 +34,7 @@ export class ChartComponent implements OnInit {
           // set data
           view.instance["data"] = data.data;
           view.instance["property"] = data['charts'][i]
-          view.instance["index"] = data.id +"_"+ i;
+          view.instance["index"] = data.id + "_" + i;
           setTimeout(() => { view.instance.drawChart() }, 0);
           this.chartPlace.insert(view.hostView)
         }
@@ -46,6 +47,7 @@ export class ChartComponent implements OnInit {
     switch (componentName) {
       case "bar": return BarChartComponent
       case "pie": return PieChartComponent
+      case "line": return LineChartComponent
       default: return null;
     }
 
