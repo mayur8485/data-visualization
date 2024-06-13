@@ -160,7 +160,7 @@ export class LineChartComponent implements OnInit {
       .attr('text-anchor', 'middle')
       .style('font-family', 'Helvetica')
       .style('font-size', 12)
-      .text('Independant');
+      .text(property.yAxis);
 
     // Y label
     svg.append('text')
@@ -168,7 +168,7 @@ export class LineChartComponent implements OnInit {
       .attr('transform', 'translate(-40,' + height/2 + ')rotate(-90)')
       .style('font-family', 'Helvetica')
       .style('font-size', 12)
-      .text('Dependant');
+      .text(property.xAxis);
 
   }
 
