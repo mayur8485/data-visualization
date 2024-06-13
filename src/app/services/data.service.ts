@@ -263,7 +263,14 @@ export class DataService {
                     "width": 450,
                     "radius": 220,
                     "fontsize": 20
-                }
+                },
+                {
+                    "type": "line",
+                    "xAxis": "Population",
+                    "yAxis": "Population",
+                    "height": 400,
+                    "width": 1560
+                  }
             ]
         }
     ]

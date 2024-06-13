@@ -12,7 +12,7 @@ export class ModalComponent implements OnInit {
   @Input() data: any;
   modalInstance: any;
   form: any;
-  type: any = [{ key: "bar", value: "Bar" }, { key: "pie", value: "Pie" }];
+  type: any = [{ key: "bar", value: "Bar" }, { key: "pie", value: "Pie" }, { key: "line", value: "Line" }];
 
   constructor(private modalService: NgbModal, private dataService: DataService) { }
 
