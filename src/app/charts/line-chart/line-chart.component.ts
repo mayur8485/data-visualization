@@ -83,7 +83,7 @@ export class LineChartComponent implements OnInit {
     axisRange["maxYAxis"] += 10;
     axisRange["maxXAxis"] += 10;
 
-    console.log("Axis Range ", axisRange)
+    // console.log("Axis Range ", axisRange)
     return axisRange
   }
 
@@ -98,7 +98,7 @@ export class LineChartComponent implements OnInit {
   }
 
   createChart(containerId: string, property: any, data: any) {
-    console.log("Chart Data ", property);
+    // console.log("Chart Data ", property);
     data = [...data];
     // console.log("Data received to draw a chart ", data);
 

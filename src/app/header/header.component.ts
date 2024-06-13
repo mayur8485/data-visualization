@@ -17,7 +17,7 @@ export class HeaderComponent {
   parseCSV(csvContent: any, name: string) {
     let lines = csvContent.split('\n');
     let headers = lines[0].split(',');
-    console.log('headers ', headers)
+    // console.log('headers ', headers)
     let header_: any = [];
     var rows: any = [];
 
@@ -49,7 +49,7 @@ export class HeaderComponent {
     if (file) {
       var reader = new FileReader();
       reader.onload = (e: any) => {
-        console.log(e);
+        // console.log(e);
         const csvContent = e?.target?.result as string;
         const data: any = this.parseCSV(csvContent, file.name);
         this.saveData(data)
