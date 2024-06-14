@@ -23,9 +23,11 @@ export class BarChartComponent implements OnInit {
     })
 
     this.form.valueChanges.subscribe((value: any) => {
-      let data = this.prepareData(this.data, value);
-      if (data) {
-        this.createChart("barChart_" + this.index, value, data)
+      if (value?.type === "Bar") {
+        let data = this.prepareData(this.data, value);
+        if (data) {
+          this.createChart("barChart_" + this.index, value, data)
+        }
       }
     })
   }
@@ -76,7 +78,7 @@ export class BarChartComponent implements OnInit {
     return finalData
   }
 
-  drawChart() {
+  init() {
     // console.log("Data in charts ", this.data, this.property)
     this.form.patchValue(this.property);
     if (this.property && this.data) {

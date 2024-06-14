@@ -25,9 +25,11 @@ export class LineChartComponent implements OnInit {
     })
 
     this.form.valueChanges.subscribe((value: any) => {
-      let axisRange: any = this.prepareChart(value, this.data)
-      value = { ...value, ...axisRange }
-      this.createChart("lineChart_" + this.index, value, this.data)
+      if (value?.type === "Line") {
+        let axisRange: any = this.prepareChart(value, this.data)
+        value = { ...value, ...axisRange }
+        this.createChart("lineChart_" + this.index, value, this.data)
+      }
     })
   }
 
@@ -87,7 +89,7 @@ export class LineChartComponent implements OnInit {
     return axisRange
   }
 
-  drawChart() {
+  init() {
     // console.log("Data in charts ", this.data, this.property)
     this.form.patchValue(this.property);
     if (this.property && this.data) {

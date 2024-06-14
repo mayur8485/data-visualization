@@ -25,14 +25,16 @@ export class PieChartComponent implements OnInit {
     })
 
     this.form.valueChanges.subscribe((value: any) => {
-      let data: any = this.prepareData(this.data, value);
-      if (data) {
-        this.createChart("pieChart_" + this.index, value, data)
+      if (value?.type === "Pie") {
+        let data: any = this.prepareData(this.data, value);
+        if (data) {
+          this.createChart("pieChart_" + this.index, value, data)
+        }
       }
     })
   }
 
-  drawChart() {
+  init() {
     // console.log("Data in charts ", this.data, this.property)
     this.form.patchValue(this.property);
     if (this.property && this.data) {
@@ -124,7 +126,7 @@ export class PieChartComponent implements OnInit {
 
     // Now add the annotation. Use the centroid method to get the best coordinates
     svg
-      .selectAll('mySlices')  
+      .selectAll('mySlices')
       .data(data_ready)
       .join('text')
       .text(function (d: any) { return d.data[0] + " : " + d.data[1] })

@@ -1,15 +1,19 @@
 <div class="chart-container" *ngIf="property && data">
-    <h3 style="float: inline-end;">Bar Chart</h3>
-    <form [formGroup]="form" class="d-flex flex-row w-50 align-items-center">
-        <label [for]="'height_'+index" class="pe-2 ps-4">Height</label>
-        <input type="number" [id]="'height_'+index" class="form-control" placeholder="height" formControlName="height">
-        <label [for]="'width_'+index" class="pe-2 ps-4">Width</label>
-        <input type="number" [id]="'width_'+index" class="form-control" placeholder="width" formControlName="width">
-        <label [for]="'xAxis_'+index" class="pe-2 ps-4">X</label>
-        <input type="text" [id]="'xAxis_'+index" class="form-control" placeholder="xAxis" formControlName="xAxis">
-        <label [for]="'yAxis_'+index" class="pe-2 ps-4">Y</label>
-        <input type="text" [id]="'yAxis_'+index" class="form-control" placeholder="yAxs" formControlName="yAxis">
-        <button type="button" class="btn btn-primary ms-2" ngbTooltip="Download" placement="right"><i class="bi bi-download" (click)="downloadSVG()"></i></button>
-    </form>
-    <div [id]="'barChart_'+index" style="width: 100%; min-height: 100px"></div>
+    <div class="d-flex justify-content-between">
+        <div class="d-flex align-items-center">
+            <form [formGroup]="form" class="d-flex flex-row w-50 align-items-center">
+                <label [for]="'height_'+index" class="pe-2 ps-4">Height</label>
+                <input type="number" [id]="'height_'+index" class="form-control" placeholder="height" formControlName="height">
+                <label [for]="'width_'+index" class="pe-2 ps-4">Width</label>
+                <input type="number" [id]="'width_'+index" class="form-control" placeholder="width" formControlName="width">
+                <label [for]="'xAxis_'+index" class="pe-2 ps-4">X</label>
+                <input type="text" [id]="'xAxis_'+index" class="form-control" placeholder="xAxis" formControlName="xAxis">
+                <label [for]="'yAxis_'+index" class="pe-2 ps-4">Y</label>
+                <input type="text" [id]="'yAxis_'+index" class="form-control" placeholder="yAxs" formControlName="yAxis">
+                <button type="button" class="btn btn-primary ms-3" ngbTooltip="Download" placement="right"><i class="bi bi-download" (click)="downloadSVG()"></i></button>
+            </form>
+        </div>
+        <h3 class="text-nowrap">Bar Chart</h3>
+    </div>
+    <div [id]="'barChart_'+index" class="view-container mx-auto" style="width: fit-content;"></div>
 </div>
