@@ -12,7 +12,7 @@ export class ModalComponent implements OnInit {
   @Input() data: any;
   modalInstance: any;
   form: any;
-  type: any = [{ key: "bar", value: "Bar" }, { key: "pie", value: "Pie" }, { key: "line", value: "Line" }];
+  type: any = [{ key: "bar", value: "Bar" }, { key: "pie", value: "Pie" }, { key: "line", value: "Line" }, { key: "map", value: "Map" }];
 
   constructor(private modalService: NgbModal, private dataService: DataService) { }
 
@@ -25,29 +25,28 @@ export class ModalComponent implements OnInit {
       "yAxis": new FormControl(),
       "yScale": new FormControl(),
       "radius": new FormControl(),
-      "fontsize": new FormControl()
+      "fontsize": new FormControl(),
+      "latitude": new FormControl(),
+      "longitude": new FormControl(),
+      "label": new FormControl(),
     });
   }
 
   createChart() {
-    const property = this.form.value;
+    const property = { ...this.form.value };
     let newObj: any = {}
     Object.keys(property).forEach((key: any) => {
       if (property[key] != null) {
         newObj[key] = property[key];
       }
-    })
-
+    })    
     this.dataService.addChart(this.data.id, newObj);
     this.closeModal();
   }
 
   openModal(content: any) {
+    this.form.reset();
     this.modalInstance = this.modalService.open(content, { backdrop: true, centered: true });
-  }
-
-  updateModalConfigs() {
-    this.modalInstance.update({ backdrop: false })
   }
 
   closeModal() {

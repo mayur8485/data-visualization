@@ -9,45 +9,82 @@
                 <div class="m-2">
                     <label for="type" class="m-2">Type</label>
                     <select class="form-select mb-3" id="type"  aria-label=".form-select-lg example" formControlName="type">
-                        <option class="form-select" *ngFor="let element of type; let i as index" [value]="element['key']">
+                        <option value="" disabled [selected]="true">Select Visualization Option</option>
+                        <option class="form-select" *ngFor="let element of type; let i as index">
                             {{element["value"]}}
                         </option>
                     </select>
                 </div>
                 <div *ngIf="form.value.type != undefined && form.value.type != ''">
-                    <div class="m-2">
+                    <div class="m-2" *ngIf="form.value.type !== 'Map'">
                         <label for="height" class="m-2">Height</label>
                         <input type="number" id="height" class="form-control" placeholder="Enter Height" formControlName="height">
                     </div>
-                    <div class="m-2">
+                    <div class="m-2" *ngIf="form.value.type !== 'Map'">
                         <label for="width" class="m-2">Width</label>
                         <input type="number" id="width" class="form-control" placeholder="Enter Width" formControlName="width">
                     </div>
-                    <div class="m-2">
+                    <div class="m-2"  *ngIf="form.value.type !== 'Map'">
                         <label for="xAxis" class="m-2">X</label>
                         <select class="form-select mb-3" id="xAxis"  aria-label=".form-select-lg example" formControlName="xAxis">
-                            <option class="form-select" *ngFor="let element of data['headers']" [id]="element.key" [value]="element['key']">
+                            <option value="" disabled [selected]="true">Select X Column</option>
+                            <option class="form-select" *ngFor="let element of data['headers']" [id]="element.key">
                                 {{element.value}}
                             </option>
                         </select>
                     </div>
-                    <div class="m-2">
+                    <div class="m-2"  *ngIf="form.value.type !== 'Map'">
                         <label for="yAxis" class="m-2">Y</label>
                         <select class="form-select mb-3" id="yAxis"  aria-label=".form-select-lg example" formControlName="yAxis">
-                            <option class="form-select" *ngFor="let element of data['headers']" [id]="element.key" [value]="element['key']">
+                            <option value="" disabled [selected]="true">Select Y Column</option>
+                            <option class="form-select" *ngFor="let element of data['headers']" [id]="element.key">
                                 {{element.value}}
                             </option>
                         </select>
                     </div>
-                    <div class="m-2" *ngIf="form.value.type === 'bar'">
+
+
+                    <!-- Map Properties -->
+                    <div class="m-2" *ngIf="form.value.type === 'Map'">
+                        <label for="latitude" class="m-2">Latitude</label>
+                        <select class="form-select mb-3" id="latitude"  aria-label=".form-select-lg example" formControlName="latitude">
+                            <!-- <option value="" disabled [selected]="true">Select your latitude column</option> -->
+                            <option class="form-select" *ngFor="let element of data['headers']" [id]="element.key" [value]="element.key">
+                                {{element.value}}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="m-2" *ngIf="form.value.type === 'Map'">
+                        <label for="longitude" class="m-2">Longitude</label>
+                        <select class="form-select mb-3" id="longitude"  aria-label=".form-select-lg example" formControlName="longitude">
+                            <!-- <option value="" disabled [selected]="true">Select your longitude column</option> -->
+                            <option class="form-select" *ngFor="let element of data['headers']" [id]="element.key" [value]="element.key">
+                                {{element.key}}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="m-2" *ngIf="form.value.type === 'Map'">
+                        <label for="label" class="m-2">Label</label>
+                        <select class="form-select mb-3" id="label"  aria-label=".form-select-lg example" formControlName="label">
+                            <!-- <option value="" disabled [selected]="true">Select your label column</option> -->
+                            <option class="form-select" *ngFor="let element of data['headers'];" [id]="element.key" [value]="element.key">
+                                {{element.value}}
+                            </option>
+                        </select>
+                    </div>
+
+
+                    <div class="m-2" *ngIf="form.value.type === 'Bar'">
                         <label for="yScale" class="m-2">YScale</label>
                         <input type="number" id="yScale" class="form-control" placeholder="Enter Y Scale" formControlName="yScale">
                     </div>
-                    <div class="m-2" *ngIf="form.value.type === 'pie'">
+                    <div class="m-2" *ngIf="form.value.type === 'Pie'">
                         <label for="radius" class="m-2">Radius</label>
                         <input type="number" id="radius" class="form-control" placeholder="Enter Radius" formControlName="radius">
                     </div>
-                    <div class="m-2" *ngIf="form.value.type === 'pie'">
+                    <div class="m-2" *ngIf="form.value.type === 'Pie'">
                         <label for="fontsize" class="m-2">Font size</label>
                         <input type="number" id="fontsize" class="form-control" placeholder="Enter Font size" formControlName="fontsize">
                     </div>

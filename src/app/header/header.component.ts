@@ -41,7 +41,7 @@ export class HeaderComponent {
       )
     });
 
-    return { data: rows, headers: header_, name: name, id: Math.floor(Math.random() * 10000000000) }
+    return { data: rows, headers: header_, name: name, id: Math.floor(Math.random() * 10000000000).toString() }
   }
 
   onAddData($event: any) {
@@ -51,7 +51,7 @@ export class HeaderComponent {
       reader.onload = (e: any) => {
         // console.log(e);
         const csvContent = e?.target?.result as string;
-        const data: any = this.parseCSV(csvContent, file.name);
+        const data: any = this.parseCSV(csvContent, file.name.split(".")[0]);
         this.saveData(data)
 
         $event.target.value = ""

@@ -12,7 +12,7 @@ export class TableViewComponent implements OnInit {
 
   page: number = 0;
   noOfPages: any = [];
-  recordsPerPage: number = 3;
+  recordsPerPage: number = 5;
   startIndex: number = 0;
 
   ngOnInit(): void {

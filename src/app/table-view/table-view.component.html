@@ -13,7 +13,7 @@
             </tr>
         </tbody>
     </table>
-    <div class="box d-flex flex-row justify-content-center border-top">
+    <div class="box d-flex flex-row justify-content-center">
         <ng-container *ngIf="noOfPages.length>1">
           <button class="btn btn-tertiary p-2" *ngFor="let page of noOfPages" (click)="addPagination(page)">{{page}}</button>
         </ng-container>

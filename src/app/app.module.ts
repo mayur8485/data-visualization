@@ -15,6 +15,7 @@ import { LineChartComponent } from './charts/line-chart/line-chart.component';
 import { HomeComponent } from './home/home.component';
 import { ViewCardsComponent } from './home/view-cards/view-cards.component';
 import { ContactComponent } from './home/contact/contact.component';
+import { MapComponent } from './map/map.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { ContactComponent } from './home/contact/contact.component';
     LineChartComponent,
     HomeComponent,
     ViewCardsComponent,
-    ContactComponent
+    ContactComponent,
+    MapComponent
 
   ],
   imports: [
@@ -41,6 +43,6 @@ import { ContactComponent } from './home/contact/contact.component';
     FormsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
