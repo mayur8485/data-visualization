@@ -15,7 +15,9 @@ import { LineChartComponent } from './charts/line-chart/line-chart.component';
 import { HomeComponent } from './home/home.component';
 import { ViewCardsComponent } from './home/view-cards/view-cards.component';
 import { ContactComponent } from './home/contact/contact.component';
-import { MapComponent } from './map/map.component';
+import { MapComponent } from './charts/map/map.component';
+import { TimelineComponent } from './home/timeline/timeline.component';
+import { AppRoutingModule } from './app-routing.module';
 
 
 @NgModule({
@@ -32,11 +34,13 @@ import { MapComponent } from './map/map.component';
     HomeComponent,
     ViewCardsComponent,
     ContactComponent,
-    MapComponent
+    MapComponent,
+    TimelineComponent
 
   ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
     NgbNavModule,
     NgbTooltip,
     ReactiveFormsModule,

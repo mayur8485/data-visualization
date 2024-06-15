@@ -1,14 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { DataService } from '../services/data.service';
+import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
+  visualizeMode: boolean = false;
 
-  constructor(private dataservice: DataService) { }
+  constructor(private dataservice: DataService, private router: Router, private route: ActivatedRoute) { }
+
+  ngOnInit(): void {
+    this.router.events.subscribe((value: any) => {
+      if (value instanceof NavigationStart) {
+        if (value.url === "/visualize") {
+          this.visualizeMode = true;
+        } else {
+          this.visualizeMode = false;
+        }
+      }
+    })
+  }
 
   saveData(data: any) {
     this.dataservice.setData(data);
@@ -49,7 +63,6 @@ export class HeaderComponent {
     if (file) {
       var reader = new FileReader();
       reader.onload = (e: any) => {
-        // console.log(e);
         const csvContent = e?.target?.result as string;
         const data: any = this.parseCSV(csvContent, file.name.split(".")[0]);
         this.saveData(data)

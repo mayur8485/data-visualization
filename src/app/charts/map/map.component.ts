@@ -39,9 +39,6 @@ export class MapComponent implements OnInit {
   }
 
   init(): void {
-
-    console.log(this.lastZoom);
-
     if (this.map) {
       this.map.remove()
     }

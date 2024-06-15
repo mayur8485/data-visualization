@@ -3,7 +3,7 @@ import { BarChartComponent } from '../bar-chart/bar-chart.component';
 import { PieChartComponent } from '../pie-chart/pie-chart.component';
 import { DataService } from 'src/app/services/data.service';
 import { LineChartComponent } from '../line-chart/line-chart.component';
-import { MapComponent } from 'src/app/map/map.component';
+import { MapComponent } from 'src/app/charts/map/map.component';
 
 @Component({
   selector: 'app-chart',
