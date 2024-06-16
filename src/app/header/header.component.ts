@@ -1,6 +1,7 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { DataService } from '../services/data.service';
-import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { NavigationStart, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { addData } from '../ngrx/data.action';
 
 @Component({
   selector: 'app-header',
@@ -10,7 +11,7 @@ import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
   visualizeMode: boolean = false;
 
-  constructor(private dataservice: DataService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private router: Router, private store: Store) { }
 
   ngOnInit(): void {
     this.router.events.subscribe((value: any) => {
@@ -25,7 +26,7 @@ export class HeaderComponent implements OnInit {
   }
 
   saveData(data: any) {
-    this.dataservice.setData(data);
+    this.store.dispatch(addData({ csvData: data }))
   }
 
   parseCSV(csvContent: any, name: string) {
@@ -55,7 +56,7 @@ export class HeaderComponent implements OnInit {
       )
     });
 
-    return { data: rows, headers: header_, name: name, id: Math.floor(Math.random() * 10000000000).toString() }
+    return { id: Math.floor(Math.random() * 10000000000).toString(), charts: [], data: rows, headers: header_, name: name }
   }
 
   onAddData($event: any) {

@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { DataService } from '../services/data.service';
+import { Store } from '@ngrx/store';
+import { addChart } from '../ngrx/data.action';
 
 @Component({
   selector: 'app-modal',
@@ -14,7 +15,7 @@ export class ModalComponent implements OnInit {
   form: any;
   type: any = [{ key: "bar", value: "Bar" }, { key: "pie", value: "Pie" }, { key: "line", value: "Line" }, { key: "map", value: "Map" }];
 
-  constructor(private modalService: NgbModal, private dataService: DataService) { }
+  constructor(private modalService: NgbModal, private store: Store) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -39,8 +40,9 @@ export class ModalComponent implements OnInit {
       if (property[key] != null) {
         newObj[key] = property[key];
       }
-    })    
-    this.dataService.addChart(this.data.id, newObj);
+    });
+
+    this.store.dispatch(addChart({ id: this.data.id, property: newObj }));
     this.closeModal();
   }
 

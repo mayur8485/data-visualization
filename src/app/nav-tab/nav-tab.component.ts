@@ -1,28 +1,34 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../services/data.service';
+
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { deleteData } from '../ngrx/data.action';
 
 @Component({
   selector: 'app-nav-tab',
   templateUrl: './nav-tab.component.html',
   styleUrls: ['./nav-tab.component.css'],
-  host: { 'class': 'position-relative', 'style': 'top:80px'}
+  host: { 'class': 'position-relative', 'style': 'top:80px' }
 })
 export class NavTabComponent implements OnInit {
   active = 0;
   data: any = [];
 
-  constructor(private dataService: DataService) { }
+  chartObservable$: Observable<any>;
+
+  constructor(private store: Store<{ 'chartData': any }>) {
+    this.chartObservable$ = store.select('chartData');
+  }
+
   ngOnInit(): void {
-    this.dataService.dataObservable.subscribe((data: any) => {
-      // console.log("Data Recevied ", data);
+    this.chartObservable$.subscribe((data: any) => {
       this.data = data;
     })
-    this.data = this.dataService.getData();
   }
 
   close($event: any, tab: any) {
     $event.stopPropagation();
-    this.dataService.delete(tab.id);
+    this.store.dispatch(deleteData({ id: tab.id }));
     this.active = 0;
   }
 

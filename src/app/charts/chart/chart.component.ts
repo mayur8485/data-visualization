@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, Type, ViewChild, ViewContainerRef } from '@angular/core';
+
 import { BarChartComponent } from '../bar-chart/bar-chart.component';
 import { PieChartComponent } from '../pie-chart/pie-chart.component';
-import { DataService } from 'src/app/services/data.service';
 import { LineChartComponent } from '../line-chart/line-chart.component';
 import { MapComponent } from 'src/app/charts/map/map.component';
 
@@ -14,17 +14,13 @@ import { MapComponent } from 'src/app/charts/map/map.component';
 export class ChartComponent implements OnInit {
   @ViewChild("chartPlace", { static: true, read: ViewContainerRef }) chartPlace: any;
   @Input() data: any
-  constructor(private viewContainerRef: ViewContainerRef, private dataService: DataService) { }
+  constructor(private viewContainerRef: ViewContainerRef) { }
 
   ngOnInit(): void {
-    this.dataService.dataObservable.subscribe((data: any) => {
-      this.addCharts(data);
-    })
     this.addCharts(this.data);
   }
 
   addCharts(data: any) {
-    // console.log("Chart Place ", this.data);
     if (data['charts']) {
       this.chartPlace.clear();
       for (let i = 0; i < data['charts'].length; i++) {
@@ -38,7 +34,7 @@ export class ChartComponent implements OnInit {
           view.instance["index"] = data.id + "_" + i;
           view.instance["headers"] = data.headers
 
-          
+
           setTimeout(() => { view.instance.init() }, 0);
           this.chartPlace.insert(view.hostView)
         }
