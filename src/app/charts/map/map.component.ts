@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import * as L from 'leaflet';
 
@@ -34,7 +34,9 @@ export class MapComponent implements OnInit {
     })
 
     this.form.valueChanges.subscribe((value: any) => {
-      this.drawCharts(this.data, value);
+      if (value?.type === "Map" && this.form.dirty && this.form.valid) {
+        this.drawCharts(this.data, value);
+      }
     })
   }
 
@@ -85,24 +87,27 @@ export class MapComponent implements OnInit {
       var greenIcon = L.icon({
         iconUrl: 'assets/images/ic_exception.svg',
         // shadowUrl: 'assets/images/ic_exception.svg',
-    
-        iconSize:     [38, 95], // size of the icon
-        shadowSize:   [50, 64], // size of the shadow
-        iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+
+        iconSize: [38, 95], // size of the icon
+        shadowSize: [50, 64], // size of the shadow
+        iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
         shadowAnchor: [4, 62],  // the same for the shadow
-        popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
-    });
+        popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+      });
 
       if (this.markers) this.markers.clearLayers();
       else this.markers = L.layerGroup().addTo(this.map!);
-
-      data.forEach((each: any) => {
-        if (!isNaN(each[property.latitude]) && !isNaN(each[property.longitude])) {
-          const marker = L.marker([+each[property.latitude], +each[property.longitude]], {icon: greenIcon}).addTo(this.map!);
-          marker.bindPopup(`${property.label} : ${each[property.label]}`)
-          marker.addTo(this.markers)
-        }
-      });
+      try {
+        data.forEach((each: any) => {
+          if (!isNaN(each[property.latitude]) && !isNaN(each[property.longitude])) {
+            const marker = L.marker([+each[property.latitude], +each[property.longitude]], { icon: greenIcon }).addTo(this.map!);
+            marker.bindPopup(`${property.label} : ${each[property.label]}`)
+            marker.addTo(this.markers)
+          }
+        });
+      } catch (e) {
+        console.log("Error occur while in map ", e);
+      }
     }
   }
 

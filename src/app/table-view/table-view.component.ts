@@ -17,14 +17,14 @@ export class TableViewComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.data) {
+      this.noOfPages = Math.ceil(this.data.data.length / this.recordsPerPage) * 10;
       this.addPagination(1);
     }
   }
 
   addPagination(page: number) {
-    this.noOfPages = Array.from({ length: Math.ceil(this.data.data.length / this.recordsPerPage) }, (_, index) => index + 1);
-    let startIndex = ((page - 1) * this.recordsPerPage);
-    let endIndex = startIndex + this.recordsPerPage;
+    const startIndex = ((page - 1) * this.recordsPerPage);
+    const endIndex = startIndex + this.recordsPerPage;
     this.startIndex = startIndex;
     this.dataChunks = this.data.data.slice(startIndex, endIndex)
   }

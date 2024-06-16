@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import * as d3 from 'd3';
 
 @Component({
@@ -18,12 +18,11 @@ export class BarChartComponent implements OnInit {
       "type": new FormControl(),
       "xAxis": new FormControl(),
       "yAxis": new FormControl(),
-      "height": new FormControl(),
-      "width": new FormControl()
+      "height": new FormControl('',Validators.min(300)),
+      "width": new FormControl('', Validators.min(1000))
     })
-
     this.form.valueChanges.subscribe((value: any) => {
-      if (value?.type === "Bar") {
+      if (value?.type === "Bar" && this.form.dirty && this.form.valid) {
         let data = this.prepareData(this.data, value);
         if (data) {
           this.createChart("barChart_" + this.index, value, data)
@@ -74,17 +73,18 @@ export class BarChartComponent implements OnInit {
         finalData.push(obj)
       }
     })
-    property.yScale = max + 10;
+    property['yScale'] = max + 10;
     return finalData
   }
 
   init() {
-    // console.log("Data in charts ", this.data, this.property)
-    this.form.patchValue(this.property);
-    if (this.property && this.data) {
-      let data = this.prepareData(this.data, this.property);
+    let property = { ...this.property };
+    
+    this.form.patchValue(property);
+    if (property && this.data) {
+      let data = this.prepareData(this.data, property);
       if (data) {
-        this.createChart("barChart_" + this.index, this.property, data);
+        this.createChart("barChart_" + this.index, property, data);
       }
     }
   }

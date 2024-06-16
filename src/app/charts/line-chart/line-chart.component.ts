@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import * as d3 from 'd3';
 
 @Component({
@@ -20,12 +20,12 @@ export class LineChartComponent implements OnInit {
       "type": new FormControl(),
       "xAxis": new FormControl(),
       "yAxis": new FormControl(),
-      "height": new FormControl(),
-      "width": new FormControl()
+      "height": new FormControl('',Validators.min(300)),
+      "width": new FormControl('',Validators.min(1000))
     })
 
     this.form.valueChanges.subscribe((value: any) => {
-      if (value?.type === "Line") {
+      if (value?.type === "Line" && this.form.dirty && this.form.valid) {
         let axisRange: any = this.prepareChart(value, this.data)
         value = { ...value, ...axisRange }
         this.createChart("lineChart_" + this.index, value, this.data)
@@ -90,12 +90,13 @@ export class LineChartComponent implements OnInit {
   }
 
   init() {
-    // console.log("Data in charts ", this.data, this.property)
-    this.form.patchValue(this.property);
-    if (this.property && this.data) {
-      let axisRange: any = this.prepareChart(this.property, this.data)
-      this.property = { ...this.property, ...axisRange }
-      this.createChart("lineChart_" + this.index, this.property, this.data);
+    let property = { ...this.property };
+
+    this.form.patchValue(property);
+    if (property && this.data) {
+      let axisRange: any = this.prepareChart(property, this.data)
+      property = { ...property, ...axisRange }
+      this.createChart("lineChart_" + this.index, property, this.data);
     }
   }
 
@@ -157,8 +158,8 @@ export class LineChartComponent implements OnInit {
 
     // X label
     svg.append('text')
-      .attr('x', width / 2 )
-      .attr('y', height + 50 )
+      .attr('x', width / 2)
+      .attr('y', height + 50)
       .attr('text-anchor', 'middle')
       .style('font-family', 'Helvetica')
       .style('font-size', 12)
@@ -167,7 +168,7 @@ export class LineChartComponent implements OnInit {
     // Y label
     svg.append('text')
       .attr('text-anchor', 'middle')
-      .attr('transform', 'translate(-40,' + height/2 + ')rotate(-90)')
+      .attr('transform', 'translate(-40,' + height / 2 + ')rotate(-90)')
       .style('font-family', 'Helvetica')
       .style('font-size', 12)
       .text(property.xAxis);

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import * as d3 from 'd3';
 
 @Component({
@@ -18,29 +18,31 @@ export class PieChartComponent implements OnInit {
       "type": new FormControl(),
       "xAxis": new FormControl(),
       "yAxis": new FormControl(),
-      "height": new FormControl(),
-      "width": new FormControl(),
+      "height": new FormControl('', Validators.min(300)),
+      "width": new FormControl('', Validators.min(1000)),
       "radius": new FormControl(),
       "fontsize": new FormControl(),
     })
 
     this.form.valueChanges.subscribe((value: any) => {
-      if (value?.type === "Pie") {
+      if (value?.type === "Pie" && this.form.dirty && this.form.valid) {
         let data: any = this.prepareData(this.data, value);
         if (data) {
           this.createChart("pieChart_" + this.index, value, data)
         }
       }
-    })
+    });
+
   }
 
   init() {
-    // console.log("Data in charts ", this.data, this.property)
-    this.form.patchValue(this.property);
-    if (this.property && this.data) {
-      let data: any = this.prepareData(this.data, this.property);
+    let property = { ...this.property };
+
+    this.form.patchValue(property);
+    if (property && this.data) {
+      let data: any = this.prepareData(this.data, property);
       if (data) {
-        this.createChart("pieChart_" + this.index, this.property, data);
+        this.createChart("pieChart_" + this.index, property, data);
       }
     }
   }
