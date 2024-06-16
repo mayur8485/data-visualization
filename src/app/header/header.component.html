@@ -1,22 +1,14 @@
 <nav class="navbar navbar-expand-lg navbar-light head-conatiner">
     <div class="container-fluid">
       <a class="navbar-brand" routerLink="/home"><h2>Data Visualization</h2></a>
-      <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button> -->
     </div>
     <div *ngIf="visualizeMode">
       <form class="d-flex" enctype="multipart/form-data">
         <input class="form-control me-2" type="file" aria-label="Search" accept=".csv" (change)="onAddData($event)">
       </form>
     </div>
-
-    <div class="d-flex align-items-center justify-content-center">
-        <a href="https://www.linkedin.com/in/mayuresh-takawane/" class="m-2" style="text-decoration: none;"
-            target="_blank" ngbTooltip="LinkedIn"><i class="bi bi-linkedin footer-icons"></i></a>
-        <a href="https://github.com/mayur8485" class="m-2" style="text-decoration: none;" target="_blank"><i
-                class="bi bi-github footer-icons" ngbTooltip="Github"></i></a>
-        <button class="btn btn-tertairy" ngbTooltip="mayureshtakawane9@gmail.com"><i class="bi bi-envelope-fill footer-icons"></i></button>
+    <div *ngIf="!visualizeMode">
+      <button class="btn btn-tertiary text-nowrap" (click)="scrollToLast()">Contact Me</button>
     </div>
 </nav>
   

@@ -25,6 +25,13 @@ export class HeaderComponent implements OnInit {
     })
   }
 
+  scrollToLast() {
+    const footer = document.querySelector('footer');
+    if (footer) {
+      footer.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
   saveData(data: any) {
     this.store.dispatch(addData({ csvData: data }))
   }
