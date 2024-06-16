@@ -58,7 +58,6 @@ export class PieChartComponent implements OnInit {
         newData[each[property['xAxis']]] += (+each[property['yAxis']])
       }
     })
-    console.log(newData)
     return newData
   }
 
