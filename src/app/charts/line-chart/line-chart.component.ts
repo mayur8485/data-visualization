@@ -11,6 +11,7 @@ export class LineChartComponent implements OnInit {
   index: any = 0;
   data: any;
   property: any;
+  headers: any;
   form: any;
 
   constructor() { }

@@ -11,6 +11,7 @@ export class BarChartComponent implements OnInit {
   index: any;
   data: any;
   property: any;
+  headers: any;
   form: any;
 
   ngOnInit(): void {
@@ -18,7 +19,7 @@ export class BarChartComponent implements OnInit {
       "type": new FormControl(),
       "xAxis": new FormControl(),
       "yAxis": new FormControl(),
-      "height": new FormControl('',Validators.min(300)),
+      "height": new FormControl('', Validators.min(300)),
       "width": new FormControl('', Validators.min(1000))
     })
     this.form.valueChanges.subscribe((value: any) => {
@@ -79,7 +80,7 @@ export class BarChartComponent implements OnInit {
 
   init() {
     let property = { ...this.property };
-    
+
     this.form.patchValue(property);
     if (property && this.data) {
       let data = this.prepareData(this.data, property);

@@ -11,6 +11,7 @@ export class PieChartComponent implements OnInit {
   index: any
   data: any;
   property: any;
+  headers: any;
   form: any;
 
   ngOnInit(): void {
@@ -19,7 +20,7 @@ export class PieChartComponent implements OnInit {
       "xAxis": new FormControl(),
       "yAxis": new FormControl(),
       "height": new FormControl('', Validators.min(300)),
-      "width": new FormControl('', Validators.min(1000)),
+      "width": new FormControl('', Validators.min(300)),
       "radius": new FormControl(),
       "fontsize": new FormControl(),
     })
@@ -57,6 +58,7 @@ export class PieChartComponent implements OnInit {
         newData[each[property['xAxis']]] += (+each[property['yAxis']])
       }
     })
+    console.log(newData)
     return newData
   }
 
