@@ -21,6 +21,7 @@ import { MapComponent } from './charts/map/map.component';
 import { TimelineComponent } from './home/timeline/timeline.component';
 import { chartsReducer } from './ngrx/data.reducer';
 import { MultibarChartComponent } from './charts/multibar-chart/multibar-chart.component';
+import { UserSelectionComponent } from './user-selection/user-selection.component';
 
 
 
@@ -40,7 +41,8 @@ import { MultibarChartComponent } from './charts/multibar-chart/multibar-chart.c
     ContactComponent,
     MapComponent,
     TimelineComponent,
-    MultibarChartComponent
+    MultibarChartComponent,
+    UserSelectionComponent
 
   ],
   imports: [

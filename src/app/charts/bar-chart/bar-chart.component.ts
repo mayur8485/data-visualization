@@ -36,7 +36,6 @@ export class BarChartComponent implements OnInit {
   }
 
   sortData() {
-    // const data = [...this.preparedData];
     let property = this.form.getRawValue();
 
     let data = this.prepareData(this.data, property);

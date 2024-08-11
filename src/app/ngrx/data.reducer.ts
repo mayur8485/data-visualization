@@ -1,5 +1,5 @@
 import { createReducer, on } from "@ngrx/store";
-import { addChart, addData, deleteData } from "./data.action";
+import { addChart, addData, deleteData, addFirebaseData } from "./data.action";
 
 const data: any[] = [
     {
@@ -249,6 +249,14 @@ const data: any[] = [
                 "height": 400,
                 "width": 1560,
                 "yScale": 25
+            },
+            {
+                "type": "MultiBar",
+                "height": 500,
+                "width": 1500,
+                "xAxis": "TRU",
+                "yAxis": "Population",
+                "groupBy": "Level"
             },
             {
                 "type": "Pie",
@@ -914,4 +922,9 @@ export const chartsReducer = createReducer(
         data = data.filter((each: any) => each.id !== action['id']);
         return [...data];
     }),
+    on(addFirebaseData, (state, action) => {
+        let data = [...state];
+        data.push(...action['csvData']['data']);
+        return [...data];
+    })
 );

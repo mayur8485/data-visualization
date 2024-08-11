@@ -9,7 +9,7 @@ import { addData } from '../ngrx/data.action';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  visualizeMode: boolean = false;
+  visualizeMode: string = "home";
 
   constructor(private router: Router, private store: Store) { }
 
@@ -17,12 +17,18 @@ export class HeaderComponent implements OnInit {
     this.router.events.subscribe((value: any) => {
       if (value instanceof NavigationStart) {
         if (value.url === "/visualize") {
-          this.visualizeMode = true;
+          this.visualizeMode = "visualize";
+        } else if (value.url === "/userselection") {
+          this.visualizeMode = "userselection"
         } else {
-          this.visualizeMode = false;
+          this.visualizeMode = "home";
         }
       }
     })
+  }
+
+  loginUser() {
+
   }
 
   scrollToLast() {
