@@ -43,6 +43,17 @@
                         </select>
                     </div>
 
+                    <div class="m-2"  *ngIf="form.value.type == 'MultiBar'">
+                        <label for="multiBar" class="m-2">Select GroupBy</label>
+                        <select class="form-select mb-3" id="groupBy"  aria-label=".form-select-lg example" formControlName="groupBy">
+                            <option value="" disabled [selected]="true">Select GroupBy Column</option>
+                            <option class="form-select" *ngFor="let element of data['headers']" [id]="element.key">
+                                {{element.value}}
+                            </option>
+                        </select>
+                    </div>
+
+
 
                     <!-- Map Properties -->
                     <div class="m-2" *ngIf="form.value.type === 'Map'">

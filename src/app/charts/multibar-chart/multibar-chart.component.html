@@ -20,12 +20,18 @@
                         {{element["value"]}}
                     </option>
                 </select>
+                
+                <label [for]="'groupBy_'+index" class="pe-2 ps-4">GroupBy</label>
+                <select class="form-select" [id]="'groupBy'+index"  aria-label=".form-select-lg example" formControlName="groupBy"  ngbTooltip="Select GroupBY Column" placement="top">
+                    <option class="form-select" *ngFor="let element of headers; let i as index" [value]="element['key']">
+                        {{element["value"]}}
+                    </option>
+                </select>
 
                 <button type="button" class="btn btn-primary ms-3" ngbTooltip="Download" placement="right"><i class="bi bi-download" (click)="downloadSVG()"></i></button>
-                <button type="button" class="btn btn-primary ms-3" ngbTooltip="Sort Chart" placement="right"><i class="bi bi-sort-up" (click)="sortData()"></i></button>
             </form>
         </div>
-        <h3 class="text-nowrap">Bar Chart</h3>
+        <h3 class="text-nowrap">Multi-Bar Chart</h3>
     </div>
-    <div [id]="'barChart_'+index" class="view-container mx-auto" style="width: fit-content;"></div>
+    <div [id]="'multiBarChart_'+index" class="view-container mx-auto" style="width: fit-content;"></div>
 </div>

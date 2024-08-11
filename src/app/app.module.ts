@@ -20,6 +20,7 @@ import { ContactComponent } from './home/contact/contact.component';
 import { MapComponent } from './charts/map/map.component';
 import { TimelineComponent } from './home/timeline/timeline.component';
 import { chartsReducer } from './ngrx/data.reducer';
+import { MultibarChartComponent } from './charts/multibar-chart/multibar-chart.component';
 
 
 
@@ -38,7 +39,8 @@ import { chartsReducer } from './ngrx/data.reducer';
     ViewCardsComponent,
     ContactComponent,
     MapComponent,
-    TimelineComponent
+    TimelineComponent,
+    MultibarChartComponent
 
   ],
   imports: [

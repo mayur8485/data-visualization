@@ -13,17 +13,18 @@ export class ModalComponent implements OnInit {
   @Input() data: any;
   modalInstance: any;
   form: any;
-  type: any = [{ key: "bar", value: "Bar" }, { key: "pie", value: "Pie" }, { key: "line", value: "Line" }, { key: "map", value: "Map" }];
+  type: any = [{ key: "bar", value: "Bar" }, { key: "pie", value: "Pie" }, { key: "line", value: "Line" }, { key: "map", value: "Map" }, { key: "multiBar", value: "MultiBar" }];
 
   constructor(private modalService: NgbModal, private store: Store) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
       "type": new FormControl(),
-      "height": new FormControl(),
-      "width": new FormControl(),
+      "height": new FormControl("1500"),
+      "width": new FormControl("500"),
       "xAxis": new FormControl(),
       "yAxis": new FormControl(),
+      "groupBy": new FormControl(),
       "yScale": new FormControl(),
       "radius": new FormControl(),
       "fontsize": new FormControl(),

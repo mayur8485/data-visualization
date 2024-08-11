@@ -37,6 +37,7 @@ export class HeaderComponent implements OnInit {
   }
 
   parseCSV(csvContent: any, name: string) {
+    csvContent = csvContent.replace("\r", "");
     let lines = csvContent.split('\n');
     let headers = lines[0].split(',');
     // console.log('headers ', headers)
@@ -73,6 +74,7 @@ export class HeaderComponent implements OnInit {
       reader.onload = (e: any) => {
         const csvContent = e?.target?.result as string;
         const data: any = this.parseCSV(csvContent, file.name.split(".")[0]);
+        console.log(data);
         this.saveData(data)
 
         $event.target.value = ""

@@ -4,6 +4,7 @@ import { BarChartComponent } from '../bar-chart/bar-chart.component';
 import { PieChartComponent } from '../pie-chart/pie-chart.component';
 import { LineChartComponent } from '../line-chart/line-chart.component';
 import { MapComponent } from 'src/app/charts/map/map.component';
+import { MultibarChartComponent } from '../multibar-chart/multibar-chart.component';
 
 @Component({
   selector: 'app-chart',
@@ -49,6 +50,7 @@ export class ChartComponent implements OnInit {
       case "Pie": return PieChartComponent
       case "Line": return LineChartComponent
       case "Map": return MapComponent
+      case "MultiBar": return MultibarChartComponent
       default: return null;
     }
 

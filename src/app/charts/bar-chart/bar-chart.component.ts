@@ -14,22 +14,45 @@ export class BarChartComponent implements OnInit {
   headers: any;
   form: any;
 
+  order: string = "random";
+
   ngOnInit(): void {
     this.form = new FormGroup({
       "type": new FormControl(),
       "xAxis": new FormControl(),
       "yAxis": new FormControl(),
-      "height": new FormControl('', Validators.min(300)),
-      "width": new FormControl('', Validators.min(1000))
-    })
+      "height": new FormControl(500, Validators.min(300)),
+      "width": new FormControl(1500, Validators.min(1000))
+    });
+
     this.form.valueChanges.subscribe((value: any) => {
       if (value?.type === "Bar" && this.form.dirty && this.form.valid) {
-        let data = this.prepareData(this.data, value);
+        const data = this.prepareData(this.data, value);
         if (data) {
           this.createChart("barChart_" + this.index, value, data)
         }
       }
     })
+  }
+
+  sortData() {
+    // const data = [...this.preparedData];
+    let property = this.form.getRawValue();
+
+    let data = this.prepareData(this.data, property);
+
+    if (this.order === "random" || this.order === "decrement") {
+      this.order = "increment";
+      data.sort((a: any, b: any) => {
+        return +a[property.yAxis] - +b[property.yAxis]
+      });
+    } else {
+      this.order = "decrement";
+      data.sort((a: any, b: any) => {
+        return +b[property.yAxis] - +a[property.yAxis]
+      });
+    }
+    this.createChart("barChart_" + this.index, property, data)
   }
 
   downloadSVG() {
@@ -54,9 +77,7 @@ export class BarChartComponent implements OnInit {
     let newData: any = {}
     data.forEach((each: any) => {
       if (each[property['xAxis']] && each[property['xAxis']] != undefined) {
-        if (!newData[each[property['xAxis']]]) {
-          newData[each[property['xAxis']]] = +each[property['yAxis']]
-        }
+        if (!newData[each[property['xAxis']]]) newData[each[property['xAxis']]] = 0;
         newData[each[property['xAxis']]] += (+each[property['yAxis']])
       }
     })
@@ -83,7 +104,7 @@ export class BarChartComponent implements OnInit {
 
     this.form.patchValue(property);
     if (property && this.data) {
-      let data = this.prepareData(this.data, property);
+      const data = this.prepareData(this.data, property);
       if (data) {
         this.createChart("barChart_" + this.index, property, data);
       }
@@ -108,7 +129,7 @@ export class BarChartComponent implements OnInit {
     // append the svg object to the body of the page
     var svg = d3.select("#" + containerId)
       .append("svg")
-      .attr("width", property.width + margin.left + margin.right)
+      .attr("width", property.width + margin.left + margin.right + 100)
       .attr("height", property.height + margin.top + margin.bottom)
       // .attr("viewBox", vb)
       .append("g")
@@ -133,7 +154,8 @@ export class BarChartComponent implements OnInit {
       .domain([0, property.yScale])
       .range([height, 0]);
     svg.append("g")
-      .call(d3.axisLeft(y));
+      .call(d3.axisLeft(y))
+    // .attr("transform", "translate(0,0)rotate(0)");
 
     // Bars
     svg.selectAll("mybar")
@@ -157,6 +179,25 @@ export class BarChartComponent implements OnInit {
       .attr("y", function (d: any) { return y(+d[property.yAxis]) - 20; })
       .attr("dy", ".75em")
       .text(function (d: any) { return d[property.yAxis]; });
+
+
+    // X label
+    svg.append('text')
+      .attr('x', width / 2)
+      .attr('y', height + 50)
+      .attr('text-anchor', 'middle')
+      .attr('transform', 'translate(0,70)rotate(0)')
+      .style('font-family', 'Helvetica')
+      .style('font-size', 20)
+      .text(property.xAxis);
+
+    // Y label
+    svg.append('text')
+      .attr('text-anchor', 'middle')
+      .attr('transform', 'translate(-40,' + height / 2 + ')rotate(-90)')
+      .style('font-family', 'Helvetica')
+      .style('font-size', 20)
+      .text(property.yAxis);
   }
 }
 
